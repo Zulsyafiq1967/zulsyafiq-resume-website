@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zulsyafiq — Personal Resume/Website</title>
+
+  <!-- Google Fonts: Space Grotesk (display) + Inter (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+
+
+  <style>
+    /* ── Reset & base ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      /* Palette */
+      --bg-page:    #0d0d0d;
+      --bg-card:    #161616;
+      --bg-card2:   #1e1e1e;
+      --accent:     #c8f04d;        
+      --accent-dim: rgba(200,240,77,.12);
+      --text-1:     #f0f0f0;
+      --text-2:     #a0a0a0;
+      --border:     rgba(255,255,255,.08);
+
+      /* Type scale */
+      --font-display: 'Space Grotesk', sans-serif;
+      --font-body:    'Inter', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg-page);
+      color: var(--text-1);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    /* ── Utility ──────────────────────────────────────────────── */
+    .accent   { color: var(--accent); }
+    .muted    { color: var(--text-2); font-size: .875rem; }
+    .tag {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 999px;
+      background: var(--accent-dim);
+      color: var(--accent);
+      font-size: .78rem;
+      font-weight: 500;
+      letter-spacing: .04em;
+    }
+
+    /* ── Layout ───────────────────────────────────────────────── */
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    section { padding: 5rem 0; }
+    section + section { border-top: 1px solid var(--border); }
+
+    /* ── Navigation ───────────────────────────────────────────── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(13,13,13,.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    nav .inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 960px;
+      margin: 0 auto;
+      padding: .9rem 1.5rem;
+    }
+
+    nav .logo {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-1);
+      text-decoration: none;
+    }
+
+    nav .logo span { color: var(--accent); }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+    }
+
+    nav ul a {
+      color: var(--text-2);
+      text-decoration: none;
+      font-size: .9rem;
+      font-weight: 500;
+      transition: color .2s;
+    }
+
+    nav ul a:hover { color: var(--accent); }
+
+    /* ── Hero ─────────────────────────────────────────────────── */
+    #hero {
+      padding: 7rem 0 5rem;
+      border-top: none;
+    }
+
+    .hero-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-eyebrow .dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: .5; transform: scale(1.4); }
+    }
+
+    .hero-eyebrow span {
+      font-size: .85rem;
+      font-weight: 500;
+      color: var(--accent);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -.02em;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero-bio {
+      max-width: 580px;
+      color: var(--text-2);
+      font-size: 1.05rem;
+      margin-bottom: 2rem;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .7rem 1.5rem;
+      border-radius: 6px;
+      font-weight: 500;
+      font-size: .95rem;
+      text-decoration: none;
+      transition: opacity .2s, transform .15s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn:hover { opacity: .85; transform: translateY(-1px); }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #0d0d0d;
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text-1);
+      border: 1px solid var(--border);
+    }
+
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ── Section headings ─────────────────────────────────────── */
+    .section-label {
+      font-size: .78rem;
+      font-weight: 500;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: .6rem;
+    }
+
+    h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 2.5rem;
+    }
+
+    /* ── Hero layout (two-column with photo) ─────────────────── */
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    /* Profile photo — hero */
+    .hero-photo-wrap {
+      position: relative;
+      width: 220px;
+      flex-shrink: 0;
+    }
+
+    .hero-photo-wrap::before {
+      content: '';
+      position: absolute;
+      inset: -6px;
+      border-radius: 18px;
+      border: 1.5px solid var(--accent);
+      opacity: .35;
+    }
+
+    .hero-photo-wrap img,
+    .hero-photo-placeholder {
+      width: 220px;
+      height: 260px;
+      border-radius: 14px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .hero-photo-placeholder {
+      background: var(--bg-card);
+      border: 1.5px dashed rgba(200,240,77,.4);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: .5rem;
+      color: var(--text-2);
+      font-size: .8rem;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    .hero-photo-placeholder .ph-icon {
+      font-size: 2.5rem;
+      opacity: .4;
+    }
+
+    /* About section photo */
+    .about-photo-wrap {
+      position: relative;
+      width: 100%;
+      max-width: 320px;
+    }
+
+    .about-photo-wrap::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      right: -8px;
+      width: 60%;
+      height: 60%;
+      border-radius: 10px;
+      border: 1.5px solid var(--accent);
+      opacity: .25;
+      z-index: 0;
+    }
+
+    .about-photo-wrap img,
+    .about-photo-placeholder {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      border-radius: 12px;
+      object-fit: cover;
+      display: block;
+      position: relative;
+      z-index: 1;
+    }
+
+    .about-photo-placeholder {
+      background: var(--bg-card);
+      border: 1.5px dashed rgba(200,240,77,.4);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: .5rem;
+      color: var(--text-2);
+      font-size: .8rem;
+      text-align: center;
+      padding: 2rem 1rem;
+      min-height: 260px;
+    }
+
+    /* ── About ────────────────────────────────────────────────── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: auto 1fr 1fr;
+      gap: 2.5rem;
+      align-items: start;
+    }
+
+    .about-text p { color: var(--text-2); margin-bottom: 1rem; }
+
+    .about-facts {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .fact-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.2rem 1.1rem;
+    }
+
+    .fact-card .label { font-size: .75rem; color: var(--text-2); margin-bottom: .25rem; text-transform: uppercase; letter-spacing: .06em; }
+    .fact-card .value { font-family: var(--font-display); font-weight: 700; font-size: 1rem; color: var(--text-1); }
+
+    /* ── Skills ───────────────────────────────────────────────── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+
+    .skill-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.4rem 1.2rem;
+      transition: border-color .2s;
+    }
+
+    .skill-card:hover { border-color: var(--accent); }
+
+    .skill-card h3 {
+      font-family: var(--font-display);
+      font-size: .95rem;
+      font-weight: 700;
+      margin-bottom: .75rem;
+    }
+
+    .skill-bar-wrap {
+      background: var(--bg-card2);
+      border-radius: 999px;
+      height: 5px;
+      margin-bottom: .4rem;
+    }
+
+    .skill-bar {
+      height: 5px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    /* ── Experience ───────────────────────────────────────────── */
+    .timeline { position: relative; padding-left: 1.5rem; }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 6px; bottom: 6px;
+      width: 1px;
+      background: var(--border);
+    }
+
+    .timeline-item { position: relative; margin-bottom: 2.5rem; }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -1.5rem;
+      top: 6px;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 2px solid var(--bg-page);
+    }
+
+    .timeline-item .meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: .5rem;
+      margin-bottom: .4rem;
+    }
+
+    .timeline-item h3 {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .timeline-item .period {
+      font-size: .8rem;
+      color: var(--text-2);
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 2px 10px;
+    }
+
+    .timeline-item .company { color: var(--accent); font-size: .88rem; font-weight: 500; margin-bottom: .5rem; }
+
+    .timeline-item p { color: var(--text-2); font-size: .93rem; }
+
+    /* ── Education ────────────────────────────────────────────── */
+    .edu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+
+    .edu-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem 1.3rem;
+      transition: border-color .2s;
+    }
+
+    .edu-card:hover { border-color: var(--accent); }
+
+    .edu-card .degree {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: .3rem;
+    }
+
+    .edu-card .institution { color: var(--accent); font-size: .88rem; margin-bottom: .75rem; }
+
+    /* ── Contact ──────────────────────────────────────────────── */
+    .contact-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .contact-info p { color: var(--text-2); margin-bottom: 1.5rem; }
+
+    .contact-links { display: flex; flex-direction: column; gap: .75rem; }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      color: var(--text-2);
+      text-decoration: none;
+      font-size: .95rem;
+      transition: color .2s;
+    }
+
+    .contact-link:hover { color: var(--accent); }
+
+    .contact-link .icon {
+      width: 36px; height: 36px;
+      border-radius: 8px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+    }
+
+    /* contact form */
+    .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+
+    .contact-form input,
+    .contact-form textarea {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: .75rem 1rem;
+      color: var(--text-1);
+      font-family: var(--font-body);
+      font-size: .95rem;
+      outline: none;
+      resize: vertical;
+      transition: border-color .2s;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus { border-color: var(--accent); }
+
+    .contact-form input::placeholder,
+    .contact-form textarea::placeholder { color: var(--text-2); }
+
+    .contact-form textarea { min-height: 120px; }
+
+    /* ── Footer ───────────────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 0;
+      text-align: center;
+      color: var(--text-2);
+      font-size: .85rem;
+    }
+
+    footer a { color: var(--accent); text-decoration: none; }
+
+    /* ── Responsive ───────────────────────────────────────────── */
+    @media (max-width: 760px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-photo-wrap { display: none; }
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .about-photo-wrap { max-width: 200px; }
+    }
+
+    @media (max-width: 680px) {
+      .contact-wrapper { grid-template-columns: 1fr; gap: 2rem; }
+      .about-facts { grid-template-columns: 1fr 1fr; }
+      nav ul { gap: 1.2rem; }
+      nav ul a { font-size: .8rem; }
+    }
+
+    @media (max-width: 420px) {
+      .about-facts { grid-template-columns: 1fr; }
+      nav ul { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+
+  <nav aria-label="Main navigation">
+    <div class="inner">
+      <a href="#hero" class="logo">ZS<span>.</span></a>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+  <section id="hero">
+    <div class="container">
+      <div class="hero-inner">
+
+        <div>
+
+          <div class="hero-eyebrow">
+            <div class="dot" aria-hidden="true"></div>
+            <span>Available for opportunities</span>
+          </div>
+
+
+          <h1>
+            Hi, I'm <span class="accent">Zulsyafiq</span>.<br />
+            I build things for the web.
+          </h1>
+
+
+          <p class="hero-bio">
+            A passionate Information Management student at Universiti Teknologi MARA (UiTM),
+            focused on creating clean, user-centred digital experiences. I love turning
+            ideas into well-crafted products.
+          </p>
+
+
+          <div class="hero-cta">
+            <a href="#contact" class="btn btn-primary">Get in touch</a>
+            <a href="#experience" class="btn btn-outline">View my work</a>
+          </div>
+        </div>
+
+
+        <div class="hero-photo-wrap">
+          <div class="hero-photo-placeholder" aria-label="Profile photo placeholder">
+            <span><img src="image/WhatsApp Image 2026-01-22 at 5.35.40 PM.jpeg" alt="Profile photo"></span>
+            <code style="font-size:.72rem; opacity:.6;"></code>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <section id="about">
+    <div class="container">
+      <p class="section-label">Who I am</p>
+      <h2>About Me</h2>
+
+      <div class="about-grid">
+
+
+        <div class="about-photo-wrap">
+          <div class="about-photo-placeholder" aria-label="About photo placeholder">
+            <span><img src="image/editedv2.gif" alt="About gif" style="width: 190px;; height: 190px;%; object-fit:cover; border-radius: inherit;"></span>
+            <code style="font-size:.72rem; opacity:.6;"></code>
+          </div>
+        </div>
+
+
+        <div class="about-text">
+          <p>
+            I'm a Final year Diploma student (5th Semester) studying Information Management at UiTM. My interest in
+            technology started when i was watching my sister working with digital tools growing up. Since then, I have
+            been developing my skills in web development, design, and digital media.
+          </p>
+          <p>
+            When I'm not coding, you'll find me listening to music, playing video games, or appreciating life.
+            I believe in continuous learning and pushing creative boundaries.
+          </p>
+
+          <div style="display:flex; flex-wrap:wrap; gap:.5rem; margin-top:1.25rem;">
+            <span class="tag">Web Design</span>
+            <span class="tag">HTML &amp; CSS</span>
+            <span class="tag">UI/UX</span>
+            <span class="tag">[Add skill]</span>
+            <span class="tag">[Add skill]</span>
+          </div>
+        </div>
+
+
+        <div class="about-facts">
+          <div class="fact-card">
+            <div class="label">Name</div>
+            <div class="value">Muhammad Zulsyafiq Bin Mohd Sabli</div>
+          </div>
+          <div class="fact-card">
+            <div class="label">Student ID</div>
+            <div class="value">2024991275</div>
+          </div>
+          <div class="fact-card">
+            <div class="label">Programme</div>
+            <div class="value">Diploma in Information Management</div>
+          </div>
+          <div class="fact-card">
+            <div class="label">Location</div>
+            <div class="value">Malaysia</div>
+          </div>
+          <div class="fact-card">
+            <div class="label">Email</div>
+            <div class="value" style="font-size:.85rem;">zulsyafiq05@email.com</div>
+          </div>
+          <div class="fact-card">
+            <div class="label">Languages</div>
+            <div class="value">Malay, English</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <section id="skills">
+    <div class="container">
+      <p class="section-label">What I know</p>
+      <h2>Skills</h2>
+
+      <div class="skills-grid">
+
+
+        <div class="skill-card">
+          <h3>HTML5</h3>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar" style="width:90%;" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+          <p class="muted">90% — Advanced</p>
+        </div>
+
+        <div class="skill-card">
+          <h3>CSS3</h3>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar" style="width:80%;"></div>
+          </div>
+          <p class="muted">80% — Proficient</p>
+        </div>
+
+        <div class="skill-card">
+          <h3>JavaScript</h3>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar" style="width:65%;"></div>
+          </div>
+          <p class="muted">65% — Intermediate</p>
+        </div>
+
+        <div class="skill-card">
+          <h3>Adobe Photoshop</h3>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar" style="width:80%;"></div>
+          </div>
+          <p class="muted">80% — Proficient</p>
+        </div>
+
+        <div class="skill-card">
+          <h3>Adobe Premiere Pro</h3>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar" style="width:80%;"></div>
+          </div>
+          <p class="muted">80% — Proficient</p>
+        </div>
+
+        <div class="skill-card">
+          <h3>Figma</h3>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar" style="width:70%;"></div>
+          </div>
+          <p class="muted">70% — Proficient</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <section id="experience">
+    <div class="container">
+      <p class="section-label">Where I've been</p>
+      <h2>Work Experience</h2>
+
+      <div class="timeline">
+
+
+        <div class="timeline-item">
+          <div class="meta">
+            <h3>Cafe Crew | Barista</h3>
+            <span class="period">March 2023 – February 2024</span>
+          </div>
+          <p class="company">Richiamo Coffee</p>
+          <p>
+            Assisted in daily café operations and beverage preparation, improving time 
+            management and multitasking skills in a fast-paced environment.
+          </p>
+        </div>
+
+
+        <div class="timeline-item">
+          <div class="meta">
+            <h3>Catering Crew</h3>
+            <span class="period">2023</span>
+          </div>
+          <p class="company">Suri Catering & Event</p>
+          <p>
+            Managed food and beverage stations during catering events while maintaining service quality, 
+            strengthening multitasking and organizational abilities.
+          </p>
+        </div>
+
+
+        <div class="timeline-item">
+          <div class="meta">
+            <h3>Deals Coordinator Internship</h3>
+            <span class="period">2 Months</span>
+          </div>
+          <p class="company">Xplode Media Sdn. Bhd.</p>
+          <p>
+            Assisted in coordinating deals and partnerships, managing client communications,
+            and supporting the sales team in achieving targets. Gained hands-on experience
+            in business operations and client relationship management.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <section id="education">
+    <div class="container">
+      <p class="section-label">My academic path</p>
+      <h2>Education</h2>
+
+      <div class="edu-grid">
+
+
+        <div class="edu-card">
+          <p class="degree">Diploma in Information Management</p>
+          <p class="institution">Universiti Teknologi MARA (UiTM)</p>
+          <p class="muted" style="margin-bottom:.6rem;">2024 – 2026</p>
+          <p style="color:var(--text-2); font-size:.9rem;">
+            Faculty of Information Science | Rembau, Negeri Sembilan
+          </p>
+        </div>
+
+
+        <div class="edu-card">
+          <p class="degree">Sijil Pelajaran Malaysia (SPM)</p>
+          <p class="institution">Sekolah Menengah Kebangsaan Bandar Baru Salak Tinggi</p>
+          <p class="muted" style="margin-bottom:.6rem;">2018 - 2022</p>
+          <p style="color:var(--text-2); font-size:.9rem;">
+            Sepang, Selangor.
+          </p>
+        </div>
+
+
+        <div class="edu-card">
+          <p class="degree">Ujian Pencapaian Sekolah Rendah (UPSR)</p>
+          <p class="institution">Sekolah Kebangsaan Kota Warisan</p>
+          <p class="muted" style="margin-bottom:.6rem;">2012 - 2017</p>
+          <p style="color:var(--text-2); font-size:.9rem;">
+            Sepang, Selangor.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <section id="contact">
+    <div class="container">
+      <p class="section-label">Say hello</p>
+      <h2>Get in Touch</h2>
+
+      <div class="contact-wrapper">
+
+
+        <div class="contact-info">
+          <p>
+            Whether you have a project in mind, want to collaborate, or just want
+            to say hi — my inbox is always open. I'll get back to you as soon as I can!
+          </p>
+
+          <div class="contact-links">
+            <a href="mailto:zulsyafiq05@email.com" class="contact-link">
+              <div class="icon" aria-hidden="true">✉</div>
+              zulsyafiq05@email.com
+            </a>
+            <a href="https://github.com/Zulsyafiq1967" target="_blank" rel="noopener" class="contact-link">
+              <div class="icon" aria-hidden="true">
+
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+                </svg>
+              </div>
+              github.com/[Zulsyafiq1967]
+            </a>
+            <a href="https://www.linkedin.com/in/zulsyafiq-muhammad-896b94394/?skipRedirect=true" target="_blank" rel="noopener" class="contact-link">
+              <div class="icon" aria-hidden="true">in</div>
+              linkedin.com/in/[ZulsyafiqMuhammad]
+            </a>
+          </div>
+        </div>
+
+
+        <form class="contact-form" onsubmit="return false;" aria-label="Contact form">
+          <input type="text" placeholder="Your Name" aria-label="Your name" />
+          <input type="email" placeholder="Your Email" aria-label="Your email" />
+          <input type="text" placeholder="Subject" aria-label="Subject" />
+          <textarea placeholder="Your Message" aria-label="Your message"></textarea>
+          <button type="submit" class="btn btn-primary" style="align-self:flex-start;">
+            Send Message
+          </button>
+        </form>
+
+      </div>
+    </div>
+  </section>
+
+
+  <footer>
+    <div class="container">
+      <p>
+        Designed &amp; built by <a href="#hero">Zulsyafiq</a> — IMD 318, UiTM &copy; 2026
+      </p>
+    </div>
+  </footer>
+
+</body>
+</html>
